@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>Inventory Management System</h1>
+
+    <h2>Add Item to Inventory</h2>
+    <form action="/add_item" method="post">
+        <label for="name">Item Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required><br>
+
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price" required><br>
+
+        <label for="quantity">Quantity:</label>
+        <input type="text" id="quantity" name="quantity" required><br>
+
+        <button type="submit">Add Item</button>
+    </form>
+
+    <hr>
+
+    <h2>Inventory</h2>
+    <ul>
+        <% inventory.forEach((item, index) => { %>
+            <li>
+                <strong><%= item.name %></strong>
+                - <%= item.description %> |
+                Price: $<%= item.price %> |
+                Quantity: <%= item.quantity %>
+                
+                <!-- "Buy1" button -->
+                <form action="/buy_item/<%= item._id %>/1" method="post" style="display: inline;">
+                    <button type="submit">Buy 1</button>
+                </form>
+                
+                <!-- "Buy2" button -->
+                <form action="/buy_item/<%= item._id %>/2" method="post" style="display: inline;">
+                    <button type="submit">Buy 2</button>
+                </form>
+                
+                <!-- "Buy3" button -->
+                <form action="/buy_item/<%= item._id %>/3" method="post" style="display: inline;">
+                    <button type="submit">Buy 3</button>
+                </form>
+
+                <form action="/delete_item/<%= item._id %>" method="post" style="display: inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
